@@ -20,7 +20,7 @@ The goals / steps of this project are the following:
 [image5]: ./examples/bboxes_and_heat.png
 [image6]: ./examples/labels_map.png
 [image7]: ./examples/output_bboxes.png
-[video1]: ./project_video.mp4
+[video1]: ./test_videos_output/project_video_output.mp4
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
@@ -48,10 +48,10 @@ I then selected V channel of HSV color spaces and parameters (`orientations=11`,
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
-I trained SVM and Decision Tree with various combinations of parameters and compared the accuracy to choose the best parameters.  
-Notice that the false negatives and false positives are numbers of samples considered both SVM and DT. So the best accuracy is the first set.  
+I trained SVM with various combinations of parameters and compared the accuracy to choose the best parameters.  
+Notice that the false negatives and false positives are numbers of samples on all dataset. So consider the accuracy and time the 7th set is the best.  
   
-| color_space | orient | pix_per_cell | cell_per_block | spatial_size | hist_bins | SVM | Time(s) | false negatives | false positives |  
+| color_space | orient | pix_per_cell | cell_per_block | spatial_size | hist_bins | Accuracy | Time(s) | false negatives | false positives |  
 |:-----------:|:-------:|:-----------:|:--------------:|:------------:|:---------:|:--------:|:---:|:-----------:| :-----------:|  
 | YCrCb | 12 | 16 | 2 | 32 | 32 | 0.9944 | 0.1947 | 6 | 4 |  
 | YCrCb | 9 | 8 | 2 | 64 | 64 | 0.9938 | 0.3596 | 9 | 2 |  
@@ -64,10 +64,9 @@ Notice that the false negatives and false positives are numbers of samples consi
 
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
-
-I trained a linear SVM using the first set of parammters from above. When extracting features I augmented train dataset using `transform_image`, ` flip_image`,`bright_image` and `warp_image` functions derived from P3, and the test dataset remianed the same. 
-
-
+  
+I trained a linear SVM using the best set of parammters from above. It is described by `train_model` function in `search_classify.ipynb`. And it's mainly consisted of `extract_features`, `StandardScaler` and `LinearSVC`. The whole pipeline is easy thanks to `skleran`!  
+  
 ### Sliding Window Search
 
 #### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
