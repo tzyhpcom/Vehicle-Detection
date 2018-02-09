@@ -1,6 +1,4 @@
-## Writeup Template
-### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
+## Vehicle Detection Writeup
 ---
 
 **Vehicle Detection Project**
@@ -15,8 +13,8 @@ The goals / steps of this project are the following:
 * Estimate a bounding box for vehicles detected.
 
 [//]: # (Image References)
-[image1]: ./examples/car_not_car.png
-[image2]: ./examples/HOG_example.jpg
+[image1]: ./output_images/car_nocar.jpg
+[image2]: ./output_images/hog.jpg
 [image3]: ./examples/sliding_windows.jpg
 [image4]: ./examples/sliding_window.jpg
 [image5]: ./examples/bboxes_and_heat.png
@@ -38,26 +36,37 @@ You're reading it!
 
 #### 1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
-The code for this step is contained in the first code cell of the IPython notebook (or in lines # through # of the file called `some_file.py`).  
+The code for this step is contained in the search_classify.ipynb.  
 
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
 ![alt text][image1]
 
-I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
-
-Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
-
+I then selected V channel of HSV color spaces and parameters (`orientations=11`, `pixels_per_cell=16`, and `cells_per_block=2`).  I grabbed a random images from car classe and displayed it to get a feel for what the `skimage.hog()` output looks like. I didn't explore a lots of parameters because it is mainly tested for SVM accuracy.
 
 ![alt text][image2]
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and...
+I trained SVM and Decision Tree with various combinations of parameters and compared the accuracy to choose the best parameters.  
+Notice that the false negatives and false positives are numbers of samples considered both SVM and DT. So the best accuracy is the first set.  
+  
+| color_space | orient | pix_per_cell | cell_per_block | spatial_size | hist_bins | SVM | Time(s) | false negatives | false positives |  
+|:-----------:|:-------:|:-----------:|:--------------:|:------------:|:---------:|:--------:|:---:|:-----------:| :-----------:|  
+| YCrCb | 12 | 16 | 2 | 32 | 32 | 0.9944 | 0.1947 | 6 | 4 |  
+| YCrCb | 9 | 8 | 2 | 64 | 64 | 0.9938 | 0.3596 | 9 | 2 |  
+| RGB | 12 | 16 | 2 | 32 | 32 | 0.9865 | 0.1938 | 12 | 12 |  
+| RGB | 9 | 8 | 2 | 64 | 64 | 0.987 | 0.3616 | 15 | 8 |  
+| HSV | 12 | 16 | 2 | 32 | 32 | 0.9932 | 0.193 | 7 | 5 |  
+| HSV | 9 | 8 | 2 | 64 | 64 |  0.9949 | 0.3684 | 7 | 2 |  
+| YUV | 12 | 16 | 2 | 32 | 32 | 0.9955 | 0.1899 | 7 | 1 |  
+| YUV | 9 | 8 | 2 | 64 | 64 | 0.9944 | 0.3692 | 7 | 3 |  
+
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using...
+I trained a linear SVM using the first set of parammters from above. When extracting features I augmented train dataset using `transform_image`, ` flip_image`,`bright_image` and `warp_image` functions derived from P3, and the test dataset remianed the same. 
+
 
 ### Sliding Window Search
 
