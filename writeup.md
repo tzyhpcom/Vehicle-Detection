@@ -36,7 +36,7 @@ You're reading it!
 
 #### 1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
-The code for this step is contained in the search_classify.ipynb.  
+The code for this step is contained in the `search_classify.ipynb`.  
 
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
@@ -48,7 +48,7 @@ I then selected V channel of HSV color spaces and parameters (`orientations=11`,
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
-I trained SVM with various combinations of parameters and compared the accuracy to choose the best parameters.  
+I trained SVM with various combinations of parameters and compared the accuracy to choose the best parameters in  `search_classify.ipynb`.  
 Notice that the false negatives and false positives are numbers of samples on all dataset. So consider the accuracy and time the 7th set is the best.  
   
 | color_space | orient | pix_per_cell | cell_per_block | spatial_size | hist_bins | Accuracy | Time(s) | false negatives | false positives |  
