@@ -73,6 +73,7 @@ I trained a linear SVM using the best set of parammters from above. It is descri
 
 I decided to search all pixels along x axis and the following ranges along y axis:  
   
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|  
 |scales|1| 1| 1.5| 1.5| 1.5| 2| 2| 3| 3|  
 |ystart |400|416| 400| 432| 464| 400| 432| 400| 464|  
 |ystop |464| 480| 496| 528| 560| 528| 560| 596| 660|  
