@@ -73,6 +73,7 @@ I trained a linear SVM using the best set of parammters from above. It is descri
 
 I decided to search all pixels along x axis and the following ranges along y axis:  
 |scales|1| 1| 1.5| 1.5| 1.5| 2| 2| 3| 3|  
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 |ystart |400|416| 400| 432| 464| 400| 432| 400| 464|  
 |ystop |464| 480| 496| 528| 560| 528| 560| 596| 660|  
 It is demonstrated by `find_cars` in `pipeline.ipynb` how to implement a  sliding window search. Because the long the distance is, the small the car is. So the above segments including cars in pictures are smaller than below segments, which means the scale is increasing. The first scale is 1, which means 1 by 64 pixels. The top left part of the following picture shows all the sliding windows in read boxs.  
