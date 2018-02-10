@@ -16,7 +16,7 @@ The goals / steps of this project are the following:
 [image1]: ./output_images/car_nocar.jpg
 [image2]: ./output_images/hog.jpg
 [image3]: ./output_images/pipeline.jpg
-[image4]: ./examples/sliding_window.jpg
+[image4]: ./output_images/heat.jpg
 [image5]: ./examples/bboxes_and_heat.png
 [image6]: ./examples/labels_map.png
 [image7]: ./examples/output_bboxes.png
@@ -94,24 +94,20 @@ Because my trained SVM has a high accuracy. I just choose serial ten frames to d
 ### Video Implementation
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Here's a [link to my video result](./test_videos_output/test_video_output.mp4)
+Here's a [link to my video result](./test_videos_output/project_video_output.mp4)
 
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
+The filter is mainly work in `process_image` in `pipeline.ipynb`. I recorded the positions of positive detections in serial 10 frames of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions. I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
-### Here are six frames and their corresponding heatmaps:
-
-![alt text][image5]
-
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
-
-### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
+### Here are a frames with bounding boxes and their corresponding heatmaps:
+  
+![alt text][image4]  
+  
+The [link to my video result](./test_videos_output/project_video_output.mp4) will demonstrated better.  
 
 
 
@@ -121,5 +117,4 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
-
+I think the traditional CV has too many handcrafts and it is hard to generalized the model. So in this project I have to select the scale, egion and threshold, carefully, or there maybe too many false positives to filter. And I think it's easily fail in another scenario with same parameters, such as chanllenge video. I might try CNN sliding windows or FCN to get better results!
