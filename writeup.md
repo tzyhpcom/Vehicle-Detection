@@ -15,7 +15,7 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 [image1]: ./output_images/car_nocar.jpg
 [image2]: ./output_images/hog.jpg
-[image3]: ./examples/sliding_windows.jpg
+[image3]: ./output_images/pipeline.jpg
 [image4]: ./examples/sliding_window.jpg
 [image5]: ./examples/bboxes_and_heat.png
 [image6]: ./examples/labels_map.png
@@ -71,8 +71,11 @@ I trained a linear SVM using the best set of parammters from above. It is descri
 
 #### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
-
+I decided to search all pixels along x axis and the following ranges along y axis:  
+|scales|1| 1| 1.5| 1.5| 1.5| 2| 2| 3| 3|  
+|ystart |400|416| 400| 432| 464| 400| 432| 400| 464|  
+|ystop |464| 480| 496| 528| 560| 528| 560| 596| 660|  
+It is demonstrated by `find_cars` in `pipeline.ipynb` how to implement a  sliding window search. Because the long the distance is, the small the car is. So the above segments including cars in pictures are smaller than below segments, which means the scale is increasing. The first scale is 1, which means 1 by 64 pixels. The top left part of the following picture shows all the sliding windows in read boxs.  
 ![alt text][image3]
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
