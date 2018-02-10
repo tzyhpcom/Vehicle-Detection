@@ -42,7 +42,7 @@ I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an 
 
 ![alt text][image1]
 
-I then selected V channel of HSV color spaces and parameters (`orientations=11`, `pixels_per_cell=16`, and `cells_per_block=2`).  I grabbed a random images from car classe and displayed it to get a feel for what the `skimage.hog()` output looks like. I didn't explore a lots of parameters because it is mainly explored with SVM accuracy in next section rather with human eyes.
+I then selected V channel of HSV color spaces and parameters (`orientations=11`, `pixels_per_cell=16`, and `cells_per_block=2`).  I grabbed a random images from car classe and displayed it to get a feel for what the `skimage.hog()` output looks like. I didn't explore a lots of parameters because it is mainly explored with SVM accuracy in next section rather than with human eyes.
 
 ![alt text][image2]
 
